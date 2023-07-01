@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 
 const foodRoutes = require('./routes/food');
+const userRoutes = require('./routes/user');
 
 app.use(cors());
 app.use(express.json());
@@ -27,7 +28,7 @@ app.get('/send/sms/', (req, res) => {
 
 
 app.use('/food', foodRoutes);
-
+app.use('/user', userRoutes);
 
 app.listen(5000,() => {
   console.log('App on port 5000');
