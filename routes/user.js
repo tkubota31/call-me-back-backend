@@ -16,14 +16,20 @@ router.get('/:email', async (req, res) => {
 })
 
 router.post('/update', async (req, res) => {
-    const { email, typesPreference, phoneNumber } = req.body
+    const { email, typesPref, phoneNumber } = req.body
+    if (!email) {
+        res.status(400).send('Missing "email" in data.');
+    }
     const userRef = db.collection(usersCollection).doc(email);
-    const dbRes = await userRef.set({
-        typesPref: typesPrefrence
+    let userInfo = {
+        typesPref: typesPref,
         phoneNumber: phoneNumber,
-    }, { merge: true })
-    // friends[name] = status
-    res.status(200).send(friends)
+    }
+    const dbRes = await userRef.set(userInfo, { merge: true });
+    res.status(200).send({
+        ...userInfo,
+        id: email,
+    })
 })
 
 router.delete('/:email', async (req, res) => {
