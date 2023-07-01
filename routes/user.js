@@ -14,4 +14,9 @@ router.get('/:id', async (req, res) => {
     res.status(200).send(doc.data())
 })
 
+router.post('/', async (req,res,next) =>{
+    let {email, phone, preference} = req.body
+     console.log(req.body)
+ })
+
 module.exports = router;

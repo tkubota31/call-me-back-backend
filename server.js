@@ -10,10 +10,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.get('/', (req, res) => {
-    console.log('root')
-    res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+//     console.log('root')
+//     res.send('Hello World!')
+// })
 
 
 const smsClient = require('./util/sms');
