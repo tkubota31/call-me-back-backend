@@ -6,10 +6,10 @@ const foodApi = "https://api.fda.gov/food/enforcement.json"
 
 
 router.get("/", async (req,res,next) => {
-    await axios.get(`${foodApi}?search=distribution_pattern:'nationwide'`)
+    await axios.get(`${foodApi}?sort=recall_initiation_date:desc&limit=1`)
         .then((result) =>{
-            console.log(result)
-            res.send(result.data);
+            console.log(result.data.results)
+            res.send(result.data.results);
         })
 })
 

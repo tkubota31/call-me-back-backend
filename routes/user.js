@@ -4,6 +4,19 @@ const { db } = require('../util/firestore/firebase.js');
 
 const usersCollection = 'users';
 
+
+router.get('/', async (req, res) => {
+    const userRef = await db.collection(usersCollection).get()
+
+    // if (!doc) {
+    //     return res.sendStatus(400);
+    // }
+    userRef.forEach(item =>{
+        console.log(item.id)
+    })
+    res.status(200).send()
+})
+
 router.get('/:email', async (req, res) => {
     const userId = req.params.email;
     const userRef = db.collection(usersCollection).doc(userId);
@@ -15,14 +28,8 @@ router.get('/:email', async (req, res) => {
     res.status(200).send(doc.data())
 })
 
-<<<<<<< HEAD
-router.post('/', async (req,res,next) =>{
-    let {email, phone, preference} = req.body
-     console.log(req.body)
- })
 
-module.exports = router;
-=======
+
 router.post('/update', async (req, res) => {
     const { email, typesPref, phoneNumber } = req.body
     if (!email) {
@@ -49,4 +56,3 @@ router.delete('/:email', async (req, res) => {
 
 
 module.exports = router;
->>>>>>> 11a98d39e69d6015a946d850459e7a9befc0bd45
